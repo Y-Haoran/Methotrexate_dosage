@@ -1,0 +1,8 @@
+{
+  "key": "paracetamol",
+  "category": "api",
+  "name": "Paracetamol",
+  "smiles": "CC(=O)NC1=CC(O)=CC=C1O",
+  "charge": 0,
+  "spin": 1
+}

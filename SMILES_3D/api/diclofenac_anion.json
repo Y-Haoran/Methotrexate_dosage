@@ -1,0 +1,8 @@
+{
+  "key": "diclofenac_anion",
+  "category": "api",
+  "name": "Diclofenac anion",
+  "smiles": "O=C([O-])C1=CC=CC=C1Nc1c(Cl)cccc1Cl",
+  "charge": -1,
+  "spin": 1
+}

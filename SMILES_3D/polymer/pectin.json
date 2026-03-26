@@ -1,0 +1,14 @@
+{
+  "key": "pectin",
+  "category": "polymer",
+  "name": "Pectin-like digalacturonic acid dimer proxy",
+  "family": "polygalacturonate polysaccharide",
+  "smiles": "O=C(O)[C@H]1O[C@H]([O:1][C@@H:2]2[C@H](O)[C@@H](O)C(O)O[C@@H]2C(=O)O)[C@H](O)[C@@H](O)[C@H]1O",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "pectin_like_digalacturonic_dimer_proxy",
+  "repeat_units": 2,
+  "end_capping_strategy": "Native dimer termini of the digalacturonic-acid proxy; no extra alkyl caps",
+  "probe_rationale": "Central glycosidic O-C bond chosen as a first pectin-like backbone scission motif under the standardized probe.",
+  "note": "Simplified digalacturonic-acid-like dimer proxy for a pectin-family backbone scission probe."
+}

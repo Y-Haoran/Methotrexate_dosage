@@ -1,0 +1,14 @@
+{
+  "key": "xanthan",
+  "category": "polymer",
+  "name": "Xanthan-like branched glucan proxy",
+  "family": "branched polysaccharide",
+  "smiles": "OC[C@H]1O[C@@H]([O:1][C@H:2]2[C@H](O)[C@@H](O[C@@H]3O[C@H](CO)[C@@H](O)[C@H](O)[C@H]3O)C(O)O[C@@H]2CO)[C@H](O)[C@@H](O)[C@H]1O",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "xanthan_like_branched_glucan_proxy",
+  "repeat_units": 3,
+  "end_capping_strategy": "Minimal branched saccharide proxy; no extra alkyl caps",
+  "probe_rationale": "Backbone glycosidic O-C bond chosen so the first xanthan-like descriptor stays comparable to the other polysaccharide families.",
+  "note": "Simplified branched glucan proxy intended to capture xanthan-like backbone-plus-branch topology without claiming a full exact repeat unit."
+}

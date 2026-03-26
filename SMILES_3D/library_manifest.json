@@ -1,0 +1,111 @@
+{
+  "output_dir": "SMILES_3D",
+  "api": [
+    {
+      "key": "diclofenac_anion",
+      "name": "Diclofenac anion",
+      "smiles_file": "SMILES_3D/api/diclofenac_anion.smi",
+      "xyz_file": "SMILES_3D/api/diclofenac_anion.xyz",
+      "json_file": "SMILES_3D/api/diclofenac_anion.json"
+    },
+    {
+      "key": "paracetamol",
+      "name": "Paracetamol",
+      "smiles_file": "SMILES_3D/api/paracetamol.smi",
+      "xyz_file": "SMILES_3D/api/paracetamol.xyz",
+      "json_file": "SMILES_3D/api/paracetamol.json"
+    }
+  ],
+  "polymer": [
+    {
+      "key": "eudragit_l100_like",
+      "name": "Eudragit L100-like fragment",
+      "smiles_file": "SMILES_3D/polymer/eudragit_l100_like.smi",
+      "xyz_file": "SMILES_3D/polymer/eudragit_l100_like.xyz",
+      "json_file": "SMILES_3D/polymer/eudragit_l100_like.json"
+    },
+    {
+      "key": "gelatin",
+      "name": "Gelatin-like peptide fragment",
+      "smiles_file": "SMILES_3D/polymer/gelatin.smi",
+      "xyz_file": "SMILES_3D/polymer/gelatin.xyz",
+      "json_file": "SMILES_3D/polymer/gelatin.json"
+    },
+    {
+      "key": "hpc",
+      "name": "HPC-like hydroxypropyl cellobiose proxy",
+      "smiles_file": "SMILES_3D/polymer/hpc.smi",
+      "xyz_file": "SMILES_3D/polymer/hpc.xyz",
+      "json_file": "SMILES_3D/polymer/hpc.json"
+    },
+    {
+      "key": "pectin",
+      "name": "Pectin-like digalacturonic acid dimer proxy",
+      "smiles_file": "SMILES_3D/polymer/pectin.smi",
+      "xyz_file": "SMILES_3D/polymer/pectin.xyz",
+      "json_file": "SMILES_3D/polymer/pectin.json"
+    },
+    {
+      "key": "peg",
+      "name": "PEG/PEO trimer-like fragment",
+      "smiles_file": "SMILES_3D/polymer/peg.smi",
+      "xyz_file": "SMILES_3D/polymer/peg.xyz",
+      "json_file": "SMILES_3D/polymer/peg.json"
+    },
+    {
+      "key": "pvp",
+      "name": "PVP trimer-like fragment",
+      "smiles_file": "SMILES_3D/polymer/pvp.smi",
+      "xyz_file": "SMILES_3D/polymer/pvp.xyz",
+      "json_file": "SMILES_3D/polymer/pvp.json"
+    },
+    {
+      "key": "xanthan",
+      "name": "Xanthan-like branched glucan proxy",
+      "smiles_file": "SMILES_3D/polymer/xanthan.smi",
+      "xyz_file": "SMILES_3D/polymer/xanthan.xyz",
+      "json_file": "SMILES_3D/polymer/xanthan.json"
+    }
+  ],
+  "solvent": [
+    {
+      "key": "water",
+      "name": "Water",
+      "smiles_file": "SMILES_3D/solvent/water.smi",
+      "xyz_file": "SMILES_3D/solvent/water.xyz",
+      "json_file": "SMILES_3D/solvent/water.json"
+    },
+    {
+      "key": "ethanol",
+      "name": "Ethanol",
+      "smiles_file": "SMILES_3D/solvent/ethanol.smi",
+      "xyz_file": "SMILES_3D/solvent/ethanol.xyz",
+      "json_file": "SMILES_3D/solvent/ethanol.json"
+    },
+    {
+      "key": "glycerol",
+      "name": "Glycerol",
+      "smiles_file": "SMILES_3D/solvent/glycerol.smi",
+      "xyz_file": "SMILES_3D/solvent/glycerol.xyz",
+      "json_file": "SMILES_3D/solvent/glycerol.json"
+    }
+  ],
+  "co_solvent": [
+    {
+      "key": "ethanol_water",
+      "json_file": "SMILES_3D/co_solvent/ethanol_water.json"
+    },
+    {
+      "key": "glycerol_water",
+      "json_file": "SMILES_3D/co_solvent/glycerol_water.json"
+    },
+    {
+      "key": "none",
+      "json_file": "SMILES_3D/co_solvent/none.json"
+    },
+    {
+      "key": "water",
+      "json_file": "SMILES_3D/co_solvent/water.json"
+    }
+  ]
+}

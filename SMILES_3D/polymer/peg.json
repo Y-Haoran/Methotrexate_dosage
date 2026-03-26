@@ -1,0 +1,14 @@
+{
+  "key": "peg",
+  "category": "polymer",
+  "name": "PEG/PEO trimer-like fragment",
+  "family": "polyether",
+  "smiles": "COCC[O:1][CH2:2]COCCOC",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "peg_trimer_dimethyl_capped",
+  "repeat_units": 3,
+  "end_capping_strategy": "Dimethyl-capped oligomer ends",
+  "probe_rationale": "Central ether backbone O-C bond chosen as a representative polyether scission motif.",
+  "note": "Representative capped PEG-like oligomer with a central C-O backbone probe."
+}

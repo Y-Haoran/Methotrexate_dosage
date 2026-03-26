@@ -1,0 +1,14 @@
+{
+  "key": "hpc",
+  "category": "polymer",
+  "name": "HPC-like hydroxypropyl cellobiose proxy",
+  "family": "cellulose ether",
+  "smiles": "CC(O)CO[C@H]1[C@H]([O:1][C@@H:2]2O[C@H](CO)[C@@H](O)[C@H](O)[C@H]2O)[C@H](O)[C@@H](O)[C@H](CO)O1",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "hpc_like_hydroxypropyl_cellobiose_proxy",
+  "repeat_units": 2,
+  "end_capping_strategy": "Cellobiose-like dimer with one fixed hydroxypropyl substitution pattern",
+  "probe_rationale": "Central glycosidic O-C bond chosen to keep the first cellulose-ether probe aligned with the pectin and xanthan scans.",
+  "note": "Simplified hydroxypropyl-cellulose-like dimer proxy with one representative hydroxypropyl substitution."
+}

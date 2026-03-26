@@ -1,0 +1,14 @@
+{
+  "key": "eudragit_l100_like",
+  "category": "polymer",
+  "name": "Eudragit L100-like fragment",
+  "family": "methacrylate copolymer",
+  "smiles": "C[C](C(=O)O)([CH2:1])[C:2](C)(C(=O)OC)CC(C)(C(=O)O)C",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "eudragit_l100_like_trimer_simplified",
+  "repeat_units": 3,
+  "end_capping_strategy": "Small alkyl-capped simplified copolymer fragment",
+  "probe_rationale": "Use the central backbone C-C linkage between the left and middle methacrylate-like units.",
+  "note": "Simplified methacrylic-acid / methyl-methacrylate-like fragment with a central backbone C-C probe."
+}

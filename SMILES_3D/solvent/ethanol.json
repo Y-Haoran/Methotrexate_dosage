@@ -1,0 +1,8 @@
+{
+  "key": "ethanol",
+  "category": "solvent",
+  "name": "Ethanol",
+  "smiles": "CCO",
+  "charge": 0,
+  "spin": 1
+}

@@ -1,0 +1,14 @@
+{
+  "key": "pvp",
+  "category": "polymer",
+  "name": "PVP trimer-like fragment",
+  "family": "vinyl lactam polymer",
+  "smiles": "CC(N1CCCC1=O)[CH2:1][CH:2](N1CCCC1=O)CC(N1CCCC1=O)C",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "pvp_trimer_methyl_capped",
+  "repeat_units": 3,
+  "end_capping_strategy": "Methyl-capped oligomer ends",
+  "probe_rationale": "Central backbone C-C bond chosen to emulate chain scission in the vinyl polymer backbone.",
+  "note": "Representative capped PVP-like oligomer with a central backbone C-C probe."
+}

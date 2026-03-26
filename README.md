@@ -44,9 +44,17 @@ It is not a direct predictor of:
 │   └── dft_spotcheck_plan_v1.md
 ├── jobs/
 │   └── run_preformulation_mechanistic_screen_gpu_normal.lsf.sh
+├── SMILES_3D/
+│   ├── api/
+│   ├── polymer/
+│   ├── solvent/
+│   ├── co_solvent/
+│   └── POLYMER_LIBRARY.md
 ├── results/
 │   └── mechanistic_screen_relaxed_gpu_v3/
 ├── scripts/
+│   ├── chemistry_registry.py
+│   ├── export_smiles_3d_library.py
 │   ├── run_formulation_descriptor_pilot.py
 │   ├── run_preformulation_mechanistic_screen.py
 │   └── utils/sql_queries/
@@ -62,6 +70,8 @@ It is not a direct predictor of:
 3. Run the screening script locally or through the LSF wrapper.
 4. Use the aggregated neutral ranking to choose DFT spot-check candidates.
 5. Validate the final shortlist experimentally.
+
+The repo also includes a generated `SMILES_3D/` library so users can quickly find the exact API, polymer, solvent, and co-solvent definitions used by the current screening code.
 
 ## Quick Start
 
@@ -99,7 +109,9 @@ Environment variables accepted by the batch wrapper:
 ## Key Files
 
 - `scripts/run_preformulation_mechanistic_screen.py`: main mechanistic screening runner
+- `scripts/export_smiles_3d_library.py`: regenerates the organized `SMILES_3D/` molecule library
 - `scripts/run_formulation_descriptor_pilot.py`: polymer fragment/descriptor helper definitions used by the screen
+- `SMILES_3D/POLYMER_LIBRARY.md`: human-readable guide to the polymer proxy fragments
 - `docs/dft_spotcheck_plan_v1.md`: first DFT shortlist plan
 - `results/mechanistic_screen_relaxed_gpu_v3/summary.md`: archived relaxed GPU demo summary
 

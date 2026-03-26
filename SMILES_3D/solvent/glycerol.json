@@ -1,0 +1,8 @@
+{
+  "key": "glycerol",
+  "category": "solvent",
+  "name": "Glycerol",
+  "smiles": "OCC(O)CO",
+  "charge": 0,
+  "spin": 1
+}

@@ -1,0 +1,20 @@
+{
+  "key": "glycerol_water",
+  "category": "co_solvent",
+  "kind": "mixture_preset",
+  "components": [
+    {
+      "molecule_key": "glycerol",
+      "name": "Glycerol",
+      "smiles": "OCC(O)CO",
+      "count": 1
+    },
+    {
+      "molecule_key": "water",
+      "name": "Water",
+      "smiles": "O",
+      "count": 2
+    }
+  ],
+  "note": "Co-solvent presets are stored as component manifests rather than one combined XYZ structure."
+}

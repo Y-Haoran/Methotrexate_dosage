@@ -1,0 +1,7 @@
+{
+  "key": "none",
+  "category": "co_solvent",
+  "kind": "mixture_preset",
+  "components": [],
+  "note": "Co-solvent presets are stored as component manifests rather than one combined XYZ structure."
+}

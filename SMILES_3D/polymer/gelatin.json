@@ -1,0 +1,14 @@
+{
+  "key": "gelatin",
+  "category": "polymer",
+  "name": "Gelatin-like peptide fragment",
+  "family": "polypeptide",
+  "smiles": "CC(=O)NC[C:1](=O)[N:2]CC(=O)NC",
+  "charge": 0,
+  "spin": 1,
+  "fragment_id": "gelatin_like_ac_glygly_nme_proxy",
+  "repeat_units": 2,
+  "end_capping_strategy": "N-acetyl / N-methylamide caps",
+  "probe_rationale": "Central peptide C-N bond chosen as a representative backbone scission motif for a gelatin-like proteinaceous polymer proxy.",
+  "note": "Simplified capped peptide proxy for a gelatin-family backbone scission probe."
+}
