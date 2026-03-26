@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+
+checkpoints/*
+!checkpoints/.gitkeep
+
+logs/*
+!logs/.gitkeep
+
+results/mechanistic_screen_run/
+results/formulation_descriptor_pilot/

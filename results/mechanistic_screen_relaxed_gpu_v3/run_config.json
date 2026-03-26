@@ -1,0 +1,8 @@
+{
+  "candidate_matrix": "data/preformulation/paracetamol_mechanistic_screen_demo.csv",
+  "checkpoint_path": "checkpoints/best_inference_ckpt.pt",
+  "task_name": "omol",
+  "device": "cuda",
+  "relax_steps": 25,
+  "fmax": 0.1
+}

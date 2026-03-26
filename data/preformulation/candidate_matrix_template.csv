@@ -1,0 +1,16 @@
+candidate_id,api_name,api_state,polymer_family,polymer_descriptor_key,cosolvent_system,cosolvent_composition_v_v,ion_condition,pH_condition,priority_tier,notes
+cand_001,API_PLACEHOLDER,neutral,PEG/PEO,peg,water,100:0:0,none,NA,screen,baseline aqueous
+cand_002,API_PLACEHOLDER,neutral,PEG/PEO,peg,ethanol_water,0:30:70,none,NA,screen,volatile co-solvent example
+cand_003,API_PLACEHOLDER,neutral,PEG/PEO,peg,glycerol_water,0:30:70,none,NA,screen,plasticizing co-solvent example
+cand_004,API_PLACEHOLDER,neutral,Gelatin,gelatin,water,100:0:0,none,NA,screen,baseline aqueous
+cand_005,API_PLACEHOLDER,neutral,Gelatin,gelatin,ethanol_water,0:30:70,none,NA,screen,volatile co-solvent example
+cand_006,API_PLACEHOLDER,neutral,Gelatin,gelatin,glycerol_water,0:30:70,none,NA,screen,plasticizing co-solvent example
+cand_007,API_PLACEHOLDER,neutral,Pectin,pectin,water,100:0:0,none,NA,screen,baseline aqueous
+cand_008,API_PLACEHOLDER,neutral,Pectin,pectin,ethanol_water,0:30:70,none,NA,screen,volatile co-solvent example
+cand_009,API_PLACEHOLDER,neutral,Pectin,pectin,glycerol_water,0:30:70,none,NA,screen,plasticizing co-solvent example
+cand_010,API_PLACEHOLDER,neutral,HPC,hpc,water,100:0:0,none,NA,screen,baseline aqueous
+cand_011,API_PLACEHOLDER,neutral,HPC,hpc,ethanol_water,0:30:70,none,NA,screen,volatile co-solvent example
+cand_012,API_PLACEHOLDER,neutral,HPC,hpc,glycerol_water,0:30:70,none,NA,screen,plasticizing co-solvent example
+cand_013,API_PLACEHOLDER,neutral,Xanthan,xanthan,water,100:0:0,none,NA,screen,baseline aqueous
+cand_014,API_PLACEHOLDER,neutral,Xanthan,xanthan,ethanol_water,0:30:70,none,NA,screen,volatile co-solvent example
+cand_015,API_PLACEHOLDER,neutral,Xanthan,xanthan,glycerol_water,0:30:70,none,NA,screen,plasticizing co-solvent example

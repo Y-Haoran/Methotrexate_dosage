@@ -1,0 +1,2 @@
+candidate_id,relaxed_energy_eV,api_polymer_contact_fraction,api_api_clustering_frequency,polymer_polymer_contact_fraction,solvent_competition_penalty,ion_sensitivity_penalty,reactive_hotspot_flag,descriptor_barrier_proxy_eV,descriptor_stretch_tolerance_A,descriptor_peak_force_eV_per_A,descriptor_hotspot_bond_type,shortlist_rank,experimental_priority,notes
+cand_001,,,,,,,,,,,,,,
