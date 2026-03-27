@@ -1,0 +1,62 @@
+{
+  "api_name": "methotrexate",
+  "api_smiles": "CN(Cc1cnc2c(n1)c(nc(n2)N)N)c3ccc(cc3)C(=O)N[C@@H](CCC(=O)O)C(=O)O",
+  "formulation_context": "semi_solid_printing",
+  "route_of_administration": "topical",
+  "processing_context": "drying_after_extrusion",
+  "pH_context": "topical_or_semi_solid_unknown",
+  "top_k_families": 4,
+  "notes": "Starting methotrexate recommendation input for semi-solid printing. Begin with neutral and monoanionic screens, then expand to the dianion if pH or salt behavior becomes central.",
+  "source_note": "Parent SMILES verified against the RCSB ligand entry for methotrexate (MTX).",
+  "state_options": [
+    {
+      "state_id": "neutral",
+      "label": "neutral",
+      "formal_charge": 0,
+      "api_spin": 1,
+      "state_smiles": null,
+      "include_in_screen": true,
+      "screen_priority": "primary"
+    },
+    {
+      "state_id": "monoanion",
+      "label": "monoanionic",
+      "formal_charge": -1,
+      "api_spin": 1,
+      "state_smiles": null,
+      "include_in_screen": true,
+      "screen_priority": "primary"
+    },
+    {
+      "state_id": "dianion",
+      "label": "dianionic",
+      "formal_charge": -2,
+      "api_spin": 1,
+      "state_smiles": null,
+      "include_in_screen": false,
+      "screen_priority": "secondary"
+    }
+  ],
+  "salt_options": [
+    {
+      "salt_id": "sodium_mono",
+      "state_id": "monoanion",
+      "ion_name": "sodium",
+      "ion_smiles": "[Na+]",
+      "ion_charge": 1,
+      "ion_spin": 1,
+      "ion_count": 1,
+      "include_in_screen": true
+    },
+    {
+      "salt_id": "sodium_di",
+      "state_id": "dianion",
+      "ion_name": "sodium",
+      "ion_smiles": "[Na+]",
+      "ion_charge": 1,
+      "ion_spin": 1,
+      "ion_count": 2,
+      "include_in_screen": false
+    }
+  ]
+}

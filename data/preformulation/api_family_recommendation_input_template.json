@@ -1,0 +1,22 @@
+{
+  "api_name": "API_NAME",
+  "api_smiles": "API_SMILES_PLACEHOLDER",
+  "formulation_context": "semi_solid_printing",
+  "route_of_administration": "topical",
+  "processing_context": "drying_after_extrusion",
+  "pH_context": "unknown",
+  "top_k_families": 4,
+  "notes": "Fill in the API-specific SMILES and adjust the state and salt options before running family recommendation.",
+  "state_options": [
+    {
+      "state_id": "neutral",
+      "label": "neutral",
+      "formal_charge": 0,
+      "api_spin": 1,
+      "state_smiles": null,
+      "include_in_screen": true,
+      "screen_priority": "primary"
+    }
+  ],
+  "salt_options": []
+}

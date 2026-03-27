@@ -9,6 +9,13 @@
       "json_file": "SMILES_3D/api/diclofenac_anion.json"
     },
     {
+      "key": "methotrexate",
+      "name": "Methotrexate",
+      "smiles_file": "SMILES_3D/api/methotrexate.smi",
+      "xyz_file": "SMILES_3D/api/methotrexate.xyz",
+      "json_file": "SMILES_3D/api/methotrexate.json"
+    },
+    {
       "key": "paracetamol",
       "name": "Paracetamol",
       "smiles_file": "SMILES_3D/api/paracetamol.smi",

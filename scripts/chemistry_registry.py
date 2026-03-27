@@ -12,6 +12,12 @@ class MoleculeSpec:
 
 
 API_LIBRARY: dict[str, MoleculeSpec] = {
+    "methotrexate": MoleculeSpec(
+        name="Methotrexate",
+        smiles="CN(Cc1cnc2c(n1)c(nc(n2)N)N)c3ccc(cc3)C(=O)N[C@@H](CCC(=O)O)C(=O)O",
+        charge=0,
+        spin=1,
+    ),
     "paracetamol": MoleculeSpec(
         name="Paracetamol",
         smiles="CC(=O)NC1=CC(O)=CC=C1O",

@@ -1,0 +1,31 @@
+api_class,formulation_context,route_of_administration,polymer_key,cosolvent_system,charge_scope,base_prior_score,rationale
+poorly_soluble_neutral,semi_solid_printing,topical,pvp,water,neutral,3.60,Strong first-pass amorphous-stabilization route for neutral aggregation-prone APIs.
+poorly_soluble_neutral,semi_solid_printing,topical,hpc,ethanol_water,neutral,3.25,Cellulose-ether route with a volatile co-solvent profile that is useful for print-focused semi-solids.
+poorly_soluble_neutral,semi_solid_printing,topical,peg,water,neutral,2.70,Simple aqueous polyether vehicle for baseline comparison against stronger polymer binders.
+poorly_soluble_neutral,semi_solid_printing,topical,gelatin,water,neutral,2.35,Proteinaceous hydrogen-bonding comparator when the API has multiple donor and acceptor sites.
+hydrophilic_neutral,semi_solid_printing,topical,hpc,water,neutral,3.20,Cellulose-ether aqueous route that usually tolerates polar APIs while preserving a printable semi-solid path.
+hydrophilic_neutral,semi_solid_printing,topical,pvp,water,neutral,2.95,PVP still acts as a strong local binder for polar neutrals and is worth keeping in the early shortlist.
+hydrophilic_neutral,semi_solid_printing,topical,xanthan,water,neutral,2.55,Polysaccharide gel-network comparator for very water-affine APIs.
+acidic_or_anionic,semi_solid_printing,topical,hpc,ethanol_water,ionic,3.55,Cellulose-ether route is a strong first screen for acidic or anionic APIs in printable semi-solid contexts.
+acidic_or_anionic,semi_solid_printing,topical,pvp,water,ionic,3.25,PVP remains a useful comparator for acidic APIs because it can still offer strong local H-bonding and dispersion support.
+acidic_or_anionic,semi_solid_printing,topical,xanthan,water,ionic,2.85,An anionic polysaccharide gel route is worth screening when the goal includes robust gel-network behavior.
+acidic_or_anionic,semi_solid_printing,topical,pectin,glycerol_water,ionic,2.70,Pectin plus glycerol-water is a softer gel-route comparator for acidic APIs and drying-sensitive systems.
+acidic_or_anionic,semi_solid_printing,topical,peg,water,ionic,2.10,Keep a simple vehicle-like control to separate polymer-binding gains from solvent-only effects.
+basic_or_cationic,semi_solid_printing,topical,pvp,water,ionic,3.40,PVP is a strong first route for cationic APIs because it often balances local stabilization with simple aqueous processing.
+basic_or_cationic,semi_solid_printing,topical,hpc,ethanol_water,ionic,3.10,Cellulose-ether plus volatile co-solvent remains a good print-focused alternative for cationic APIs.
+basic_or_cationic,semi_solid_printing,topical,pectin,glycerol_water,ionic,2.65,Oppositely charged or highly polar gel-network routes can be informative when ionic reorganization matters.
+basic_or_cationic,semi_solid_printing,topical,xanthan,water,ionic,2.55,Polysaccharide gel comparator for cationic APIs where local electrostatic reorganization may matter.
+amphiphilic,semi_solid_printing,topical,pvp,water,all,3.35,Amphiphilic APIs often benefit from a balanced polar-apolar local environment and strong local binder contacts.
+amphiphilic,semi_solid_printing,topical,hpc,ethanol_water,all,3.10,Cellulose-ether plus ethanol-water covers a useful middle ground when both polarity and drying behavior matter.
+amphiphilic,semi_solid_printing,topical,peg,glycerol_water,all,2.65,Flexible solvent-rich comparator for amphiphilic APIs.
+highly_flexible_polar,semi_solid_printing,topical,hpc,ethanol_water,all,3.30,Flexible polar APIs often sit well in cellulose-ether routes with a controlled volatile co-solvent component.
+highly_flexible_polar,semi_solid_printing,topical,pvp,water,all,3.05,PVP remains a strong dispersion and local-contact comparator for flexible polar molecules.
+highly_flexible_polar,semi_solid_printing,topical,gelatin,water,all,2.80,Hydrogen-bond-rich peptide-like polymer comparator for flexible polar APIs.
+highly_flexible_polar,semi_solid_printing,topical,peg,water,all,2.45,Simple vehicle-like comparator for flexible polar APIs.
+aromatic_aggregation_prone,semi_solid_printing,topical,pvp,water,all,3.70,PVP is prioritized when aromatic self-association risk is high and local API-polymer binding needs to be tested early.
+aromatic_aggregation_prone,semi_solid_printing,topical,hpc,ethanol_water,all,3.20,Cellulose-ether route gives a strong secondary check against aromatic aggregation in a print-relevant solvent setting.
+aromatic_aggregation_prone,semi_solid_printing,topical,peg,water,all,2.60,Simple polyether comparator to determine whether stronger binders are truly needed.
+hydrophilic_neutral,any,any,peg,water,neutral,2.10,Low-complexity aqueous vehicle comparator for broadly hydrophilic neutral APIs.
+poorly_soluble_neutral,any,any,pvp,water,neutral,3.00,General fallback route for neutral APIs where API-polymer stabilization is the main concern.
+acidic_or_anionic,any,any,hpc,water,ionic,2.80,General fallback cellulose-ether route for acidic or anionic APIs.
+basic_or_cationic,any,any,pvp,water,ionic,2.85,General fallback PVP route for basic or cationic APIs.

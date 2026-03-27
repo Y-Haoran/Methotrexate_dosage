@@ -10,3 +10,4 @@ logs/*
 
 results/mechanistic_screen_run/
 results/formulation_descriptor_pilot/
+results/api_family_recommendation_run/

@@ -1,0 +1,8 @@
+{
+  "key": "methotrexate",
+  "category": "api",
+  "name": "Methotrexate",
+  "smiles": "CN(Cc1cnc2c(n1)c(nc(n2)N)N)c3ccc(cc3)C(=O)N[C@@H](CCC(=O)O)C(=O)O",
+  "charge": 0,
+  "spin": 1
+}

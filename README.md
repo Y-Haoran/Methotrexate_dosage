@@ -37,6 +37,9 @@ It is not a direct predictor of:
 │       ├── paracetamol_mechanistic_screen_demo.csv
 │       ├── candidate_matrix_template.csv
 │       ├── candidate_matrix_augmented_template.csv
+│       ├── api_family_recommendation_input_template.json
+│       ├── methotrexate_family_recommendation_input.json
+│       ├── family_recommendation_priors.csv
 │       ├── polymer_descriptor_library.csv
 │       ├── polymer_family_aliases.csv
 │       └── screening_results_template.csv
@@ -56,6 +59,7 @@ It is not a direct predictor of:
 ├── scripts/
 │   ├── chemistry_registry.py
 │   ├── export_smiles_3d_library.py
+│   ├── run_api_family_recommendation.py
 │   ├── run_formulation_descriptor_pilot.py
 │   ├── run_preformulation_mechanistic_screen.py
 │   └── utils/sql_queries/
@@ -76,6 +80,8 @@ The repo also includes a generated `SMILES_3D/` library so users can quickly fin
 
 For the next-stage architecture, see `docs/unseen_api_recommendation_system_v1.md`, which defines how this screening repo can evolve into an unseen API family recommendation workflow.
 
+That architecture is now partially implemented through a rule-based family recommendation layer that starts from API SMILES, computes formulation-relevant descriptors, assigns API classes, applies family priors, and writes a shortlist-ready mechanistic screen matrix.
+
 ## Quick Start
 
 ### Local run
@@ -91,6 +97,16 @@ python scripts/run_preformulation_mechanistic_screen.py \
   --ranking-group neutral \
   --output-dir results/mechanistic_screen_run
 ```
+
+### Family recommendation run
+
+```bash
+python scripts/run_api_family_recommendation.py \
+  --input-json data/preformulation/methotrexate_family_recommendation_input.json \
+  --output-dir results/api_family_recommendation_run
+```
+
+This recommendation layer does not need a FAIRChem checkpoint. It uses RDKit descriptors, rule-based API classification, and the curated family prior table to produce a shortlist and a mechanistic-screen candidate matrix.
 
 ### GPU batch run
 
@@ -112,8 +128,11 @@ Environment variables accepted by the batch wrapper:
 ## Key Files
 
 - `scripts/run_preformulation_mechanistic_screen.py`: main mechanistic screening runner
+- `scripts/run_api_family_recommendation.py`: API descriptor extraction, rule-based API class assignment, family prior scoring, and downstream candidate-matrix generation
 - `scripts/export_smiles_3d_library.py`: regenerates the organized `SMILES_3D/` molecule library
 - `scripts/run_formulation_descriptor_pilot.py`: polymer fragment/descriptor helper definitions used by the screen
+- `data/preformulation/family_recommendation_priors.csv`: curated family-level prior table used by the recommendation layer
+- `data/preformulation/methotrexate_family_recommendation_input.json`: methotrexate-specific input template for the new recommendation layer
 - `SMILES_3D/POLYMER_LIBRARY.md`: human-readable guide to the polymer proxy fragments
 - `docs/dft_spotcheck_plan_v1.md`: first DFT shortlist plan
 - `docs/unseen_api_recommendation_system_v1.md`: system design for unseen API family recommendation
@@ -132,7 +151,12 @@ High-level takeaway from that archive:
 
 ## Adapting This Repo To Methotrexate
 
-The included demo matrix is still a paracetamol placeholder. For methotrexate-focused work, the first changes should be:
+There are now two methotrexate entry points in the repo:
+
+- `data/preformulation/methotrexate_family_recommendation_input.json` for family recommendation and shortlist generation
+- `SMILES_3D/api/methotrexate.smi` plus `SMILES_3D/api/methotrexate.xyz` for the organized building-block library
+
+The mechanistic demo matrix is still a paracetamol placeholder. For methotrexate-focused work, the first changes should be:
 
 - replace the demo matrix with methotrexate plus relevant protonation or salt states
 - add the excipient families that match the real formulation program
