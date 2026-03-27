@@ -27,6 +27,17 @@ The user-facing outputs are:
 
 These are generated from tracked repository outputs, not mockups.
 
+Platform model stack:
+
+![Platform model stack](docs/figures/platform_model_stack.png)
+
+What it shows:
+
+- the platform is not one black box
+- the front layer uses structure-driven descriptors and family priors
+- the back layer uses checkpoint-based mechanistic screening to rank local candidate systems
+- the output is a shortlist for DFT and lab work, not a claim of final formulation prediction
+
 Methotrexate family recommendation example:
 
 ![Methotrexate family ranking](docs/figures/methotrexate_family_ranking.png)
@@ -146,6 +157,7 @@ Core libraries and priors:
 Current docs:
 
 - [unseen_api_recommendation_system_v1.md](docs/unseen_api_recommendation_system_v1.md)
+- [model_stack_and_scientific_rationale.md](docs/model_stack_and_scientific_rationale.md)
 - [project_status_summary.md](docs/project_status_summary.md)
 - [dft_spotcheck_plan_v1.md](docs/dft_spotcheck_plan_v1.md)
 
@@ -154,6 +166,30 @@ Current docs:
 If someone asks what this repo is right now, the best answer is:
 
 The current repo is a recommendation-and-screening platform for unseen APIs. It is designed to propose plausible formulation families, rank them mechanistically, and produce a shortlist for downstream DFT and lab evaluation.
+
+## Model Stack
+
+The current platform uses two real model layers and one orchestration layer.
+
+Recommendation layer:
+
+- RDKit descriptor extraction
+- rule-based API classification
+- curated family prior table
+
+Mechanistic layer:
+
+- checkpoint-based FAIRChem molecular potential through `FAIRChemCalculator`
+- current archived relaxed GPU example used `task_name = omol`
+- relaxation and scoring are run through ASE with FIRE
+
+Platform layer:
+
+- one-command unseen-API intake
+- candidate generation
+- shortlist packaging for DFT and lab planning
+
+The detailed explanation of model ability and why this supports the platform is in [model_stack_and_scientific_rationale.md](docs/model_stack_and_scientific_rationale.md).
 
 ## Current Archived Findings
 

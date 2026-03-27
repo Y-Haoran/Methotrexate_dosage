@@ -135,10 +135,74 @@ def render_paracetamol_relaxed_demo() -> None:
     plt.close(fig)
 
 
+def render_platform_model_stack() -> None:
+    fig, ax = plt.subplots(figsize=(13.0, 5.8), dpi=220)
+    fig.patch.set_facecolor("#f8f5ef")
+    ax.set_facecolor("#f8f5ef")
+    ax.axis("off")
+
+    boxes = [
+        {
+            "xy": (0.03, 0.24),
+            "w": 0.26,
+            "h": 0.52,
+            "fc": "#fff3d6",
+            "ec": "#8a5a00",
+            "title": "Layer 1\nUser Input",
+            "text": "API name\nAPI SMILES\ncontext\ncharge-state options",
+        },
+        {
+            "xy": (0.37, 0.18),
+            "w": 0.26,
+            "h": 0.64,
+            "fc": "#e8f4ea",
+            "ec": "#1f6f4a",
+            "title": "Layer 2\nCandidate Generation",
+            "text": "RDKit descriptors\nrule-based API classes\nfamily prior table\ncandidate matrix generation",
+        },
+        {
+            "xy": (0.71, 0.14),
+            "w": 0.26,
+            "h": 0.72,
+            "fc": "#e9f0fb",
+            "ec": "#205493",
+            "title": "Layer 3\nMechanistic Screening",
+            "text": "FAIRChem checkpoint\nASE + FIRE relaxation\ntask_name = omol\nreplicate scoring\naggregated shortlist",
+        },
+    ]
+
+    for box in boxes:
+        rect = plt.Rectangle(box["xy"], box["w"], box["h"], facecolor=box["fc"], edgecolor=box["ec"], linewidth=2.0)
+        ax.add_patch(rect)
+        x, y = box["xy"]
+        ax.text(x + box["w"] / 2, y + box["h"] - 0.08, box["title"], ha="center", va="top", fontsize=16, weight="bold", color="#1f1f1f")
+        ax.text(x + box["w"] / 2, y + box["h"] / 2 - 0.02, box["text"], ha="center", va="center", fontsize=12, color="#333333", linespacing=1.5)
+
+    arrow_style = dict(arrowstyle="-|>", linewidth=2.2, color="#4b5563", shrinkA=0, shrinkB=0)
+    ax.annotate("", xy=(0.37, 0.49), xytext=(0.29, 0.49), arrowprops=arrow_style)
+    ax.annotate("", xy=(0.71, 0.49), xytext=(0.63, 0.49), arrowprops=arrow_style)
+
+    ax.text(0.50, 0.94, "Platform Model Stack", ha="center", va="center", fontsize=20, weight="bold", color="#1f1f1f")
+    ax.text(
+        0.50,
+        0.07,
+        "Why this works: the platform first narrows plausible formulation families from structure, then ranks them with local mechanistic evidence.",
+        ha="center",
+        va="center",
+        fontsize=11,
+        color="#444444",
+    )
+
+    fig.tight_layout()
+    fig.savefig(FIGURE_DIR / "platform_model_stack.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     ensure_output_dir()
     render_methotrexate_family_ranking()
     render_paracetamol_relaxed_demo()
+    render_platform_model_stack()
     print(str(FIGURE_DIR))
     return 0
 
