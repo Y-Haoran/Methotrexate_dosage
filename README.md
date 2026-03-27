@@ -1,186 +1,166 @@
 # Methotrexate Dosage
 
-Mechanistic preformulation screening workspace for semi-solid and polymer-assisted drug formulation design.
+Give us an API, and this platform recommends the most promising formulation families to test first.
 
-This repository now contains a clean standalone slice of the atomistic screening workflow built around FAIRChem-style molecular potentials, polymer fragment proxies, candidate formulation matrices, and archived benchmark outputs. The immediate purpose is to support fast ranking of API-polymer-cosolvent candidates before DFT spot checks and wet-lab validation.
+This repository provides a simple workflow for unseen-API formulation-family recommendation. Users provide an API structure, and the platform generates candidate systems, runs mechanistic screening when a checkpoint is available, and returns a shortlist for DFT and lab testing.
 
-## What This Repo Does
+## What It Does
 
-- screens local `API + polymer + solvent/cosolvent` clusters
-- compares API-polymer association against API self-aggregation
-- separates neutral and ionic branches so unstable ionic references are not over-interpreted
-- supports multi-seed replicate screening with `mean ± sd`, rank stability, and top-1/top-2 frequencies
-- keeps a compact archive of the first relaxed GPU demo and the first DFT shortlist
+This repo is a lightweight platform for recommending and ranking candidate formulation families for a new API before lab evaluation.
 
-## Current Scope
+It currently does four things well:
 
-The screening layer is useful for:
+- takes an API structure as input
+- extracts formulation-relevant API descriptors automatically
+- generates candidate formulation systems from API classes and family priors
+- ranks those systems and returns a shortlist for downstream DFT and wet-lab work
 
-- local compatibility
-- local solvation competition
-- early excipient ranking
-- shortlist generation for DFT
+The user-facing outputs are:
 
-It is not a direct predictor of:
+- `summary.md`
+- `ranking.csv`
+- `candidate_matrix_generated.csv`
+- `buy_list.txt`
+- `lab_test_plan.txt`
 
-- bulk rheology
-- final printability windows
-- dissolution curves
-- long-term storage success
+## What It Does Not Do
 
-## Repository Layout
+This repo is not:
 
-```text
-.
-├── data/
-│   └── preformulation/
-│       ├── paracetamol_mechanistic_screen_demo.csv
-│       ├── candidate_matrix_template.csv
-│       ├── candidate_matrix_augmented_template.csv
-│       ├── api_family_recommendation_input_template.json
-│       ├── methotrexate_family_recommendation_input.json
-│       ├── family_recommendation_priors.csv
-│       ├── polymer_descriptor_library.csv
-│       ├── polymer_family_aliases.csv
-│       └── screening_results_template.csv
-├── docs/
-│   ├── dft_spotcheck_plan_v1.md
-│   ├── project_status_summary.md
-│   └── unseen_api_recommendation_system_v1.md
-├── jobs/
-│   └── run_preformulation_mechanistic_screen_gpu_normal.lsf.sh
-├── SMILES_3D/
-│   ├── api/
-│   ├── polymer/
-│   ├── solvent/
-│   ├── co_solvent/
-│   └── POLYMER_LIBRARY.md
-├── results/
-│   ├── mechanistic_screen_relaxed_gpu_v3/
-│   └── methotrexate_family_recommendation_v1/
-├── scripts/
-│   ├── chemistry_registry.py
-│   ├── export_smiles_3d_library.py
-│   ├── run_api_family_recommendation.py
-│   ├── run_formulation_descriptor_pilot.py
-│   ├── run_preformulation_mechanistic_screen.py
-│   └── utils/sql_queries/
-└── checkpoints/
-```
+- a final formulation predictor
+- a printability predictor
+- a full formulation design platform
 
-`scripts/utils/sql_queries/` contains the original SQL assets already present in the upstream repository and has been left intact.
+It does not directly predict:
 
-## Main Workflow
+- final formulation ratios
+- exact printability windows
+- exact dissolution curves
+- long-term stability
+- full bulk rheology
 
-1. Put a compatible FAIRChem checkpoint into `checkpoints/best_inference_ckpt.pt`.
-2. Start from `data/preformulation/candidate_matrix_template.csv` or replace the demo matrix with a methotrexate-specific matrix.
-3. Run the screening script locally or through the LSF wrapper.
-4. Use the aggregated neutral ranking to choose DFT spot-check candidates.
-5. Validate the final shortlist experimentally.
+The correct framing is:
 
-The repo also includes a generated `SMILES_3D/` library so users can quickly find the exact API, polymer, solvent, and co-solvent definitions used by the current screening code.
-
-For the next-stage architecture, see `docs/unseen_api_recommendation_system_v1.md`, which defines how this screening repo can evolve into an unseen API family recommendation workflow.
-
-That architecture is now partially implemented through a rule-based family recommendation layer that starts from API SMILES, computes formulation-relevant descriptors, assigns API classes, applies family priors, and writes a shortlist-ready mechanistic screen matrix.
-
-For the current project snapshot and the current methotrexate findings, see `docs/project_status_summary.md`.
+- preformulation triage platform
+- formulation-family recommendation and screening layer
+- shortlist generator for DFT and lab validation
 
 ## Quick Start
 
-### Local run
+The simplest user entry point is the repo-root script:
 
 ```bash
-python scripts/run_preformulation_mechanistic_screen.py \
-  --candidate-matrix data/preformulation/paracetamol_mechanistic_screen_demo.csv \
-  --checkpoint-path checkpoints/best_inference_ckpt.pt \
-  --device cpu \
-  --relax-steps 20 \
-  --n-replicates 5 \
-  --seed 42 \
-  --ranking-group neutral \
-  --output-dir results/mechanistic_screen_run
+python run_unseen_api_recommendation.py \
+  --api-name methotrexate \
+  --api-smiles "CN(Cc1cnc2c(n1)c(nc(n2)N)N)c3ccc(cc3)C(=O)N[C@@H](CCC(=O)O)C(=O)O" \
+  --context semi_solid_printing
 ```
 
-### Family recommendation run
+If `checkpoints/best_inference_ckpt.pt` is present, the platform will also launch the mechanistic screening layer on the generated candidate matrix. If no checkpoint is present, it still returns the recommendation-layer shortlist and planning files.
+
+For a JSON-driven run:
 
 ```bash
-python scripts/run_api_family_recommendation.py \
-  --input-json data/preformulation/methotrexate_family_recommendation_input.json \
-  --output-dir results/api_family_recommendation_run
+python run_unseen_api_recommendation.py \
+  --input-json data/preformulation/methotrexate_family_recommendation_input.json
 ```
 
-This recommendation layer does not need a FAIRChem checkpoint. It uses RDKit descriptors, rule-based API classification, and the curated family prior table to produce a shortlist and a mechanistic-screen candidate matrix.
+## Repo Structure
 
-### GPU batch run
+The repo is structured in three layers.
 
-```bash
-bsub < jobs/run_preformulation_mechanistic_screen_gpu_normal.lsf.sh
-```
+### Layer 1: User-Facing Platform Layer
 
-Environment variables accepted by the batch wrapper:
+Users mainly interact with:
 
-- `CANDIDATE_MATRIX`
-- `CHECKPOINT_PATH`
-- `OUTPUT_DIR`
-- `RELAX_STEPS`
-- `N_REPLICATES`
-- `SEED`
-- `RANKING_GROUP`
-- `VENV`
+- [run_unseen_api_recommendation.py](run_unseen_api_recommendation.py)
+- API input flags or a JSON input file
+- final recommendation reports and shortlist files
 
-## Key Files
+### Layer 2: Candidate Generation Layer
 
-- `scripts/run_preformulation_mechanistic_screen.py`: main mechanistic screening runner
-- `scripts/run_api_family_recommendation.py`: API descriptor extraction, rule-based API class assignment, family prior scoring, and downstream candidate-matrix generation
-- `scripts/export_smiles_3d_library.py`: regenerates the organized `SMILES_3D/` molecule library
-- `scripts/run_formulation_descriptor_pilot.py`: polymer fragment/descriptor helper definitions used by the screen
-- `data/preformulation/family_recommendation_priors.csv`: curated family-level prior table used by the recommendation layer
-- `data/preformulation/methotrexate_family_recommendation_input.json`: methotrexate-specific input template for the new recommendation layer
-- `SMILES_3D/POLYMER_LIBRARY.md`: human-readable guide to the polymer proxy fragments
-- `docs/dft_spotcheck_plan_v1.md`: first DFT shortlist plan
-- `docs/project_status_summary.md`: current project status, implemented workflow, methotrexate findings, and next steps
-- `docs/unseen_api_recommendation_system_v1.md`: system design for unseen API family recommendation
-- `results/mechanistic_screen_relaxed_gpu_v3/summary.md`: archived relaxed GPU demo summary
-- `results/methotrexate_family_recommendation_v1/summary.md`: archived methotrexate family recommendation summary
+Backend modules:
 
-## Current Archived Result
+- [extract_api_descriptors.py](scripts/extract_api_descriptors.py)
+- [classify_api.py](scripts/classify_api.py)
+- [generate_candidate_matrix.py](scripts/generate_candidate_matrix.py)
+- [explain_results.py](scripts/explain_results.py)
 
-The repo includes the first relaxed GPU demo archive in `results/mechanistic_screen_relaxed_gpu_v3/`.
+This layer handles:
 
-High-level takeaway from that archive:
+- descriptor extraction
+- API classification
+- family priors
+- candidate matrix generation
+- user-facing explanation files
 
-- top neutral demo candidate: `paracetamol + pvp + water`
-- neutral and ionic rankings are separated
-- the ranking is useful for shortlist generation, not final decision-making
-- the next strong scientific step is replicate-based neutral screening followed by DFT checks
+### Layer 3: Mechanistic Screening Layer
 
-The repo also now includes a methotrexate family recommendation archive in `results/methotrexate_family_recommendation_v1/`.
+Backend screening scripts:
 
-High-level takeaway from that archive:
+- [run_preformulation_mechanistic_screen.py](scripts/run_preformulation_mechanistic_screen.py)
+- [run_formulation_descriptor_pilot.py](scripts/run_formulation_descriptor_pilot.py)
+- [run_preformulation_mechanistic_screen_gpu_normal.lsf.sh](jobs/run_preformulation_mechanistic_screen_gpu_normal.lsf.sh)
 
-- methotrexate looks descriptor-wise like a highly polar, flexible, acid-bearing API
-- current neutral shortlist: `PVP + water`, then `HPC + water`, then `HPC + ethanol/water`
-- current monoanionic shortlist: `HPC + ethanol/water`, then `PVP + water`, then `Xanthan + water`
-- the next strong scientific step is explicit ionized methotrexate state handling plus replicate mechanistic screening on the shortlist
+This layer handles:
 
-## Adapting This Repo To Methotrexate
+- local cluster building
+- relaxation
+- replicate scoring
+- aggregated ranking
 
-There are now two methotrexate entry points in the repo:
+## Key Data Assets
 
-- `data/preformulation/methotrexate_family_recommendation_input.json` for family recommendation and shortlist generation
-- `SMILES_3D/api/methotrexate.smi` plus `SMILES_3D/api/methotrexate.xyz` for the organized building-block library
-- `results/methotrexate_family_recommendation_v1/` for the first archived methotrexate family recommendation output
+Core libraries and priors:
 
-The mechanistic demo matrix is still a paracetamol placeholder. For methotrexate-focused work, the first changes should be:
+- [family_recommendation_priors.csv](data/preformulation/family_recommendation_priors.csv)
+- [polymer_descriptor_library.csv](data/preformulation/polymer_descriptor_library.csv)
+- [methotrexate_family_recommendation_input.json](data/preformulation/methotrexate_family_recommendation_input.json)
+- [SMILES_3D](SMILES_3D)
 
-- replace the demo matrix with methotrexate plus relevant protonation or salt states
-- add the excipient families that match the real formulation program
-- run neutral replicate screening first
-- use the aggregated ranking to define the DFT batch
+Current docs:
+
+- [unseen_api_recommendation_system_v1.md](docs/unseen_api_recommendation_system_v1.md)
+- [project_status_summary.md](docs/project_status_summary.md)
+- [dft_spotcheck_plan_v1.md](docs/dft_spotcheck_plan_v1.md)
+
+## Current Repo Positioning
+
+If someone asks what this repo is right now, the best answer is:
+
+The current repo is a recommendation-and-screening platform for unseen APIs. It is designed to propose plausible formulation families, rank them mechanistically, and produce a shortlist for downstream DFT and lab evaluation.
+
+中文可以理解成：
+
+当前这个 repo 是一个面向新 API 的推荐与筛选平台，用来提出合理的 formulation family、进行机理排序，并输出后续 DFT 和实验验证的 shortlist。
+
+## Current Archived Findings
+
+The repo currently tracks two important archived outputs.
+
+Paracetamol relaxed GPU demo:
+
+- [mechanistic_screen_relaxed_gpu_v3](results/mechanistic_screen_relaxed_gpu_v3)
+- top neutral demo candidate stayed `PVP + water`
+- main lesson: relaxation matters and static rankings are not enough
+
+Methotrexate family recommendation v1:
+
+- [methotrexate_family_recommendation_v1](results/methotrexate_family_recommendation_v1)
+- neutral shortlist: `PVP + water`, `HPC + water`, `HPC + ethanol/water`
+- monoanionic shortlist: `HPC + ethanol/water`, `PVP + water`, `Xanthan + water`
+
+## Current Output Logic
+
+The main user-facing pipeline is:
+
+`new API input -> automatic candidate generation -> mechanistic ranking when available -> DFT/lab shortlist output`
+
+That is the main line of the repo. Everything else is support code behind that flow.
 
 ## Notes
 
-- `checkpoints/` is intentionally empty in git; place model weights there locally.
-- `logs/` and new run outputs are ignored by default.
-- If you use a temporary GitHub token to push this repo, revoke and rotate it afterward.
+- `checkpoints/` is intentionally empty in git.
+- `results/unseen_api_recommendation_run/` and other default run directories are ignored by default.
+- the repo is useful for shortlist generation, not final decision-making.
+- if you used a temporary GitHub token to push, revoke and rotate it afterward.
