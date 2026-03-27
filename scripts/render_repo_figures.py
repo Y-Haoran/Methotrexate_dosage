@@ -218,18 +218,10 @@ def render_platform_model_stack() -> None:
         ax.text2D(0.02, 0.94, title, transform=ax.transAxes, fontsize=11, weight="bold", color="#1f1f1f")
         ax.text2D(0.02, 0.86, subtitle, transform=ax.transAxes, fontsize=8.5, color="#555555")
 
-    def draw_arrow(x1: float, y1: float, x2: float, y2: float) -> None:
-        canvas.add_patch(
-            FancyArrowPatch(
-                (x1, y1),
-                (x2, y2),
-                arrowstyle="Simple,head_length=10,head_width=10,tail_width=0.9",
-                mutation_scale=1.0,
-                linewidth=0.0,
-                color="#6b7a89",
-                alpha=0.85,
-            )
-        )
+    def draw_stage_badge(x: float, y: float, label: str, face: str, edge: str) -> None:
+        badge = Circle((x, y), 0.018, facecolor=face, edgecolor=edge, linewidth=1.4)
+        canvas.add_patch(badge)
+        canvas.text(x, y, label, ha="center", va="center", fontsize=10.5, weight="bold", color="#1f1f1f")
 
     canvas.text(0.5, 0.968, "AI-Driven Platform: From Molecular Inputs To Formulation Shortlist", ha="center", va="top", fontsize=20.5, weight="bold", color="#1f1f1f")
     canvas.text(
@@ -245,6 +237,9 @@ def render_platform_model_stack() -> None:
     draw_container(0.03, 0.12, 0.26, 0.78, "#fff7ea", "#b7791f", "Input Chemistry", "Representative 3D structures used by the platform")
     draw_container(0.34, 0.12, 0.29, 0.78, "#eef6ff", "#2b6cb0", "Model Architecture", "Descriptor layer + mechanistic layer")
     draw_container(0.68, 0.12, 0.29, 0.78, "#f3f8f1", "#2f855a", "Platform Outputs", "What the user gets back")
+    draw_stage_badge(0.05, 0.88, "1", "#fff3d6", "#b7791f")
+    draw_stage_badge(0.36, 0.88, "2", "#e6f0ff", "#2b6cb0")
+    draw_stage_badge(0.70, 0.88, "3", "#e8f5e9", "#2f855a")
 
     api_ax = fig.add_axes([0.058, 0.57, 0.19, 0.20], projection="3d")
     polymer_ax = fig.add_axes([0.058, 0.35, 0.19, 0.20], projection="3d")
@@ -369,9 +364,6 @@ def render_platform_model_stack() -> None:
         va="top",
         linespacing=1.5,
     )
-
-    draw_arrow(0.29, 0.51, 0.34, 0.51)
-    draw_arrow(0.63, 0.51, 0.68, 0.51)
 
     canvas.text(
         0.50,
