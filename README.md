@@ -41,7 +41,8 @@ It is not a direct predictor of:
 │       ├── polymer_family_aliases.csv
 │       └── screening_results_template.csv
 ├── docs/
-│   └── dft_spotcheck_plan_v1.md
+│   ├── dft_spotcheck_plan_v1.md
+│   └── unseen_api_recommendation_system_v1.md
 ├── jobs/
 │   └── run_preformulation_mechanistic_screen_gpu_normal.lsf.sh
 ├── SMILES_3D/
@@ -72,6 +73,8 @@ It is not a direct predictor of:
 5. Validate the final shortlist experimentally.
 
 The repo also includes a generated `SMILES_3D/` library so users can quickly find the exact API, polymer, solvent, and co-solvent definitions used by the current screening code.
+
+For the next-stage architecture, see `docs/unseen_api_recommendation_system_v1.md`, which defines how this screening repo can evolve into an unseen API family recommendation workflow.
 
 ## Quick Start
 
@@ -113,6 +116,7 @@ Environment variables accepted by the batch wrapper:
 - `scripts/run_formulation_descriptor_pilot.py`: polymer fragment/descriptor helper definitions used by the screen
 - `SMILES_3D/POLYMER_LIBRARY.md`: human-readable guide to the polymer proxy fragments
 - `docs/dft_spotcheck_plan_v1.md`: first DFT shortlist plan
+- `docs/unseen_api_recommendation_system_v1.md`: system design for unseen API family recommendation
 - `results/mechanistic_screen_relaxed_gpu_v3/summary.md`: archived relaxed GPU demo summary
 
 ## Current Archived Result
