@@ -45,6 +45,7 @@ It is not a direct predictor of:
 │       └── screening_results_template.csv
 ├── docs/
 │   ├── dft_spotcheck_plan_v1.md
+│   ├── project_status_summary.md
 │   └── unseen_api_recommendation_system_v1.md
 ├── jobs/
 │   └── run_preformulation_mechanistic_screen_gpu_normal.lsf.sh
@@ -55,7 +56,8 @@ It is not a direct predictor of:
 │   ├── co_solvent/
 │   └── POLYMER_LIBRARY.md
 ├── results/
-│   └── mechanistic_screen_relaxed_gpu_v3/
+│   ├── mechanistic_screen_relaxed_gpu_v3/
+│   └── methotrexate_family_recommendation_v1/
 ├── scripts/
 │   ├── chemistry_registry.py
 │   ├── export_smiles_3d_library.py
@@ -81,6 +83,8 @@ The repo also includes a generated `SMILES_3D/` library so users can quickly fin
 For the next-stage architecture, see `docs/unseen_api_recommendation_system_v1.md`, which defines how this screening repo can evolve into an unseen API family recommendation workflow.
 
 That architecture is now partially implemented through a rule-based family recommendation layer that starts from API SMILES, computes formulation-relevant descriptors, assigns API classes, applies family priors, and writes a shortlist-ready mechanistic screen matrix.
+
+For the current project snapshot and the current methotrexate findings, see `docs/project_status_summary.md`.
 
 ## Quick Start
 
@@ -135,8 +139,10 @@ Environment variables accepted by the batch wrapper:
 - `data/preformulation/methotrexate_family_recommendation_input.json`: methotrexate-specific input template for the new recommendation layer
 - `SMILES_3D/POLYMER_LIBRARY.md`: human-readable guide to the polymer proxy fragments
 - `docs/dft_spotcheck_plan_v1.md`: first DFT shortlist plan
+- `docs/project_status_summary.md`: current project status, implemented workflow, methotrexate findings, and next steps
 - `docs/unseen_api_recommendation_system_v1.md`: system design for unseen API family recommendation
 - `results/mechanistic_screen_relaxed_gpu_v3/summary.md`: archived relaxed GPU demo summary
+- `results/methotrexate_family_recommendation_v1/summary.md`: archived methotrexate family recommendation summary
 
 ## Current Archived Result
 
@@ -149,12 +155,22 @@ High-level takeaway from that archive:
 - the ranking is useful for shortlist generation, not final decision-making
 - the next strong scientific step is replicate-based neutral screening followed by DFT checks
 
+The repo also now includes a methotrexate family recommendation archive in `results/methotrexate_family_recommendation_v1/`.
+
+High-level takeaway from that archive:
+
+- methotrexate looks descriptor-wise like a highly polar, flexible, acid-bearing API
+- current neutral shortlist: `PVP + water`, then `HPC + water`, then `HPC + ethanol/water`
+- current monoanionic shortlist: `HPC + ethanol/water`, then `PVP + water`, then `Xanthan + water`
+- the next strong scientific step is explicit ionized methotrexate state handling plus replicate mechanistic screening on the shortlist
+
 ## Adapting This Repo To Methotrexate
 
 There are now two methotrexate entry points in the repo:
 
 - `data/preformulation/methotrexate_family_recommendation_input.json` for family recommendation and shortlist generation
 - `SMILES_3D/api/methotrexate.smi` plus `SMILES_3D/api/methotrexate.xyz` for the organized building-block library
+- `results/methotrexate_family_recommendation_v1/` for the first archived methotrexate family recommendation output
 
 The mechanistic demo matrix is still a paracetamol placeholder. For methotrexate-focused work, the first changes should be:
 
