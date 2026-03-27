@@ -23,6 +23,30 @@ The user-facing outputs are:
 - `buy_list.txt`
 - `lab_test_plan.txt`
 
+## Example Evidence
+
+These are generated from tracked repository outputs, not mockups.
+
+Methotrexate family recommendation example:
+
+![Methotrexate family ranking](docs/figures/methotrexate_family_ranking.png)
+
+What it shows:
+
+- the platform does not return one vague answer
+- it separates neutral and ionic recommendation branches
+- it produces a ranked family shortlist that matches the current chemical interpretation of methotrexate
+
+Archived mechanistic screening example:
+
+![Paracetamol relaxed mechanistic demo](docs/figures/paracetamol_relaxed_demo.png)
+
+What it shows:
+
+- the mechanistic layer is doing nontrivial work after relaxation
+- post-relaxation ranking differs from pre-relaxation ranking
+- the archived GPU result is strong enough to justify using this repo as a shortlist-generation platform
+
 ## What It Does Not Do
 
 This repo is not:
@@ -117,6 +141,7 @@ Core libraries and priors:
 - [polymer_descriptor_library.csv](data/preformulation/polymer_descriptor_library.csv)
 - [methotrexate_family_recommendation_input.json](data/preformulation/methotrexate_family_recommendation_input.json)
 - [SMILES_3D](SMILES_3D)
+- [render_repo_figures.py](scripts/render_repo_figures.py)
 
 Current docs:
 
@@ -129,10 +154,6 @@ Current docs:
 If someone asks what this repo is right now, the best answer is:
 
 The current repo is a recommendation-and-screening platform for unseen APIs. It is designed to propose plausible formulation families, rank them mechanistically, and produce a shortlist for downstream DFT and lab evaluation.
-
-中文可以理解成：
-
-当前这个 repo 是一个面向新 API 的推荐与筛选平台，用来提出合理的 formulation family、进行机理排序，并输出后续 DFT 和实验验证的 shortlist。
 
 ## Current Archived Findings
 
