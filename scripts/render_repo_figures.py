@@ -38,7 +38,7 @@ def compact_family_label(polymer_key: str, cosolvent_system: str) -> str:
         "glycerol_water": "Gly/H2O",
     }
     cosolvent = mapping.get(cosolvent_system, cosolvent_system.replace("_", "/"))
-    return f"{polymer} + {cosolvent}"
+    return f"{polymer}/{cosolvent}"
 
 
 def render_methotrexate_family_ranking() -> None:
@@ -172,7 +172,7 @@ def render_platform_model_stack() -> None:
         )
         canvas.add_patch(patch)
         canvas.text(x + 0.02, y + h - 0.035, title, fontsize=14, weight="bold", color="#1f1f1f", va="top")
-        canvas.text(x + 0.02, y + h - 0.075, subtitle, fontsize=9.5, color="#555555", va="top")
+        canvas.text(x + 0.02, y + h - 0.078, subtitle, fontsize=8.9, color="#555555", va="top")
 
     def normalize_positions(positions: np.ndarray) -> tuple[np.ndarray, np.ndarray, float]:
         centered = positions - positions.mean(axis=0, keepdims=True)
@@ -223,26 +223,27 @@ def render_platform_model_stack() -> None:
             FancyArrowPatch(
                 (x1, y1),
                 (x2, y2),
-                arrowstyle="-|>",
-                mutation_scale=18,
-                linewidth=2.0,
-                color="#55606e",
+                arrowstyle="Simple,head_length=10,head_width=10,tail_width=0.9",
+                mutation_scale=1.0,
+                linewidth=0.0,
+                color="#6b7a89",
+                alpha=0.85,
             )
         )
 
-    canvas.text(0.5, 0.965, "AI-Driven Platform: From Molecular Inputs To Formulation Shortlist", ha="center", va="top", fontsize=21, weight="bold", color="#1f1f1f")
+    canvas.text(0.5, 0.968, "AI-Driven Platform: From Molecular Inputs To Formulation Shortlist", ha="center", va="top", fontsize=20.5, weight="bold", color="#1f1f1f")
     canvas.text(
         0.5,
-        0.93,
+        0.935,
         "Real 3D building blocks from the repo feed the recommendation layer and the checkpoint-based mechanistic screening layer.",
         ha="center",
         va="top",
-        fontsize=10.5,
+        fontsize=9.8,
         color="#4b5563",
     )
 
     draw_container(0.03, 0.12, 0.26, 0.78, "#fff7ea", "#b7791f", "Input Chemistry", "Representative 3D structures used by the platform")
-    draw_container(0.34, 0.12, 0.29, 0.78, "#eef6ff", "#2b6cb0", "Model Architecture", "Descriptor engine + mechanistic engine")
+    draw_container(0.34, 0.12, 0.29, 0.78, "#eef6ff", "#2b6cb0", "Model Architecture", "Descriptor layer + mechanistic layer")
     draw_container(0.68, 0.12, 0.29, 0.78, "#f3f8f1", "#2f855a", "Platform Outputs", "What the user gets back")
 
     api_ax = fig.add_axes([0.058, 0.57, 0.19, 0.20], projection="3d")
@@ -271,19 +272,19 @@ def render_platform_model_stack() -> None:
     model_ax.axis("off")
 
     model_boxes = [
-        (0.05, 0.73, 0.90, 0.18, "#fff8e1", "#b7791f", "1. Descriptor intake", "RDKit descriptors\ncharge-state context\nAPI class inference"),
-        (0.05, 0.46, 0.90, 0.18, "#eefbf3", "#2f855a", "2. Candidate generation", "family prior table\ncandidate family expansion\nscreen matrix generation"),
-        (0.05, 0.16, 0.90, 0.24, "#edf2ff", "#2b6cb0", "3. Mechanistic model", "FAIRChemCalculator\n`task_name = omol`\nASE + FIRE relaxation\nlocal energies and forces\nreplicate ranking"),
+        (0.05, 0.73, 0.90, 0.18, "#fff8e1", "#b7791f", "1. Descriptors", "RDKit\ncharge states"),
+        (0.05, 0.46, 0.90, 0.18, "#eefbf3", "#2f855a", "2. Candidates", "family priors\nbuild systems"),
+        (0.05, 0.19, 0.90, 0.20, "#edf2ff", "#2b6cb0", "3. Mechanics", "FAIRChem + ASE\nrelax + score"),
     ]
     for x, y, w, h, fc, ec, title, text in model_boxes:
         patch = FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.02,rounding_size=0.04", facecolor=fc, edgecolor=ec, linewidth=1.8)
         model_ax.add_patch(patch)
         model_ax.text(x + 0.04, y + h - 0.04, title, fontsize=12, weight="bold", color="#1f1f1f", va="top")
-        model_ax.text(x + 0.04, y + h - 0.11, text, fontsize=10, color="#374151", va="top", linespacing=1.5)
-    model_ax.add_patch(FancyArrowPatch((0.50, 0.71), (0.50, 0.64), arrowstyle="-|>", mutation_scale=16, linewidth=1.8, color="#55606e"))
-    model_ax.add_patch(FancyArrowPatch((0.50, 0.44), (0.50, 0.40), arrowstyle="-|>", mutation_scale=16, linewidth=1.8, color="#55606e"))
+        model_ax.text(x + 0.04, y + h - 0.11, text, fontsize=10.0, color="#374151", va="top", linespacing=1.35)
+    model_ax.add_patch(FancyArrowPatch((0.50, 0.71), (0.50, 0.64), arrowstyle="Simple,head_length=8,head_width=8,tail_width=0.7", mutation_scale=1.0, linewidth=0.0, color="#7a8796", alpha=0.8))
+    model_ax.add_patch(FancyArrowPatch((0.50, 0.44), (0.50, 0.40), arrowstyle="Simple,head_length=8,head_width=8,tail_width=0.7", mutation_scale=1.0, linewidth=0.0, color="#7a8796", alpha=0.8))
 
-    ranking_ax = fig.add_axes([0.71, 0.58, 0.23, 0.23])
+    ranking_ax = fig.add_axes([0.725, 0.515, 0.205, 0.225])
     ranking_ax.set_facecolor("#ffffff")
     ranking_df = pd.read_csv(BASE_DIR / "results" / "methotrexate_family_recommendation_v1" / "family_recommendations.csv")
     ranking_df = ranking_df[
@@ -291,22 +292,48 @@ def render_platform_model_stack() -> None:
         | ((ranking_df["state_id"] == "monoanion") & (ranking_df["state_rank"] <= 2))
     ].copy()
     ranking_df["label"] = ranking_df.apply(
-        lambda row: f"{'N' if row['state_id'] == 'neutral' else 'I'}: {compact_family_label(str(row['polymer_key']), str(row['cosolvent_system']))}",
+        lambda row: f"{'N' if row['state_id'] == 'neutral' else 'I'} | {compact_family_label(str(row['polymer_key']), str(row['cosolvent_system']))}",
         axis=1,
     )
-    ranking_df = ranking_df.sort_values("recommendation_score", ascending=True)
-    ranking_ax.barh(ranking_df["label"], ranking_df["recommendation_score"], color=["#0b6e4f", "#0b6e4f", "#b35c1e", "#b35c1e"])
-    ranking_ax.set_title("Ranked family shortlist", fontsize=11.5, weight="bold")
-    ranking_ax.set_xlabel("score", fontsize=9)
+    ranking_df = ranking_df.sort_values("recommendation_score", ascending=False).reset_index(drop=True)
+    positions = np.arange(len(ranking_df))
+    bar_colors = ["#b35c1e" if state_id == "monoanion" else "#0b6e4f" for state_id in ranking_df["state_id"]]
+    ranking_ax.barh(positions, ranking_df["recommendation_score"], color=bar_colors, edgecolor="#1f1f1f", linewidth=0.5)
+    xmax = float(ranking_df["recommendation_score"].max()) * 1.18
+    ranking_ax.set_xlim(0, xmax)
+    ranking_ax.set_yticks([])
+    ranking_ax.invert_yaxis()
+    for idx, row in ranking_df.iterrows():
+        ranking_ax.text(
+            xmax * 0.03,
+            positions[idx],
+            str(row["label"]),
+            va="center",
+            ha="left",
+            fontsize=8.2,
+            color="#1f1f1f",
+            bbox={"facecolor": "#ffffff", "edgecolor": "none", "alpha": 0.84, "pad": 0.12},
+        )
+        ranking_ax.text(
+            float(row["recommendation_score"]) + xmax * 0.015,
+            positions[idx],
+            f"{float(row['recommendation_score']):.1f}",
+            va="center",
+            ha="left",
+            fontsize=8.2,
+            color="#1f1f1f",
+        )
+    ranking_ax.set_title("Shortlist", fontsize=10.8, weight="bold", pad=6)
     ranking_ax.grid(axis="x", alpha=0.22, linestyle="--")
-    ranking_ax.tick_params(labelsize=8.5)
+    ranking_ax.tick_params(axis="x", labelsize=8.0)
     ranking_ax.spines["top"].set_visible(False)
     ranking_ax.spines["right"].set_visible(False)
+    ranking_ax.spines["left"].set_visible(False)
 
-    cluster_ax = fig.add_axes([0.71, 0.34, 0.23, 0.18])
+    cluster_ax = fig.add_axes([0.725, 0.31, 0.205, 0.16])
     cluster_ax.set_facecolor("#ffffff")
     cluster_ax.axis("off")
-    cluster_ax.set_title("Cluster interaction map", fontsize=11.5, weight="bold", pad=4)
+    cluster_ax.set_title("Interaction map", fontsize=11.0, weight="bold", pad=4)
     nodes = {
         "API": (0.20, 0.58),
         "Polymer": (0.52, 0.78),
@@ -314,30 +341,30 @@ def render_platform_model_stack() -> None:
         "Ion": (0.50, 0.24),
     }
     edges = [
-        ("API", "Polymer", "#0f766e", "stabilization"),
-        ("API", "Solvent", "#b7791f", "competition"),
-        ("API", "Ion", "#7c2d12", "charge state"),
-        ("Polymer", "Solvent", "#2563eb", "local solvation"),
+        ("API", "Polymer", "#0f766e", "bind"),
+        ("API", "Solvent", "#b7791f", "compete"),
+        ("API", "Ion", "#7c2d12", "ion"),
+        ("Polymer", "Solvent", "#2563eb", "solvate"),
     ]
     for start, end, color, label in edges:
         x1, y1 = nodes[start]
         x2, y2 = nodes[end]
         cluster_ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-", linewidth=2.2, color=color, alpha=0.9))
-        cluster_ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 0.03, label, fontsize=7.5, color=color, ha="center")
+        cluster_ax.text((x1 + x2) / 2, (y1 + y2) / 2 + 0.03, label, fontsize=7.1, color=color, ha="center")
     for name, (x, y) in nodes.items():
         circle = Circle((x, y), 0.08, facecolor="#f8fafc", edgecolor="#334155", linewidth=1.4)
         cluster_ax.add_patch(circle)
         cluster_ax.text(x, y, name, ha="center", va="center", fontsize=9.5, weight="bold", color="#1f1f1f")
 
-    target_ax = fig.add_axes([0.71, 0.16, 0.23, 0.12])
+    target_ax = fig.add_axes([0.725, 0.13, 0.205, 0.12])
     target_ax.set_facecolor("#ffffff")
     target_ax.axis("off")
-    target_ax.text(0.02, 0.92, "Predicted targets and decisions", fontsize=11.5, weight="bold", color="#1f1f1f", va="top")
+    target_ax.text(0.02, 0.92, "Output bundle", fontsize=11.0, weight="bold", color="#1f1f1f", va="top")
     target_ax.text(
         0.02,
-        0.70,
-        "• API-polymer association\n• API self-aggregation control\n• solvent competition\n• ion sensitivity\n• DFT and lab shortlist",
-        fontsize=9.6,
+        0.69,
+        "• ranked shortlist\n• interaction map\n• DFT / lab plan",
+        fontsize=9.4,
         color="#374151",
         va="top",
         linespacing=1.5,
